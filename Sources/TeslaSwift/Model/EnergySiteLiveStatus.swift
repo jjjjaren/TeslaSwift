@@ -14,7 +14,7 @@ open class EnergySiteLiveStatus: Codable {
     open var energyLeft: Double
     open var totalPackEnergy: Double
     open var percentageCharged: Double
-    open var backupCapable: Bool
+    open var backupCapable: Bool?
     open var batteryPower: Double
     open var loadPower: Double
     open var gridStatus: String
