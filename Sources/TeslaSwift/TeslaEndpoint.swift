@@ -34,6 +34,7 @@ enum Endpoint {
     case getEnergySiteLiveStatus(siteID: String)
     case getEnergySiteInfo(siteID: String)
     case getEnergySiteHistory(siteID: String, period: EnergySiteHistory.Period)
+    case getEnergySiteCalendarHistory(siteID: String, period: EnergySiteHistory.Period)
     case getBatteryStatus(batteryID: String)
     case getBatteryData(batteryID: String)
     case getBatteryPowerHistory(batteryID: String)
@@ -91,6 +92,8 @@ extension Endpoint {
                 return "/api/1/energy_sites/\(siteID)/site_info"
             case .getEnergySiteHistory(let siteID, _):
                 return "/api/1/energy_sites/\(siteID)/history"
+            case .getEnergySiteCalendarHistory(let siteID, _):
+                return "/api/1/energy_sites/\(siteID)/calendar_history"
             case .getBatteryStatus(let batteryID):
                 return "/api/1/powerwalls/\(batteryID)/status"
             case .getBatteryData(let batteryID):
@@ -104,7 +107,7 @@ extension Endpoint {
 		switch self {
             case .revoke, .oAuth2Token, .oAuth2TokenCN, .wakeUp, .command:
                 return "POST"
-        case .vehicles, .vehicleSummary, .mobileAccess, .allStates, .chargeState, .climateState, .driveState, .guiSettings, .vehicleState, .vehicleConfig, .nearbyChargingSites, .oAuth2Authorization, .oAuth2revoke, .oAuth2AuthorizationCN, .oAuth2revokeCN, .products, .getEnergySiteStatus, .getEnergySiteLiveStatus, .getEnergySiteInfo, .getEnergySiteHistory, .getBatteryStatus, .getBatteryData, .getBatteryPowerHistory:
+            case .vehicles, .vehicleSummary, .mobileAccess, .allStates, .chargeState, .climateState, .driveState, .guiSettings, .vehicleState, .vehicleConfig, .nearbyChargingSites, .oAuth2Authorization, .oAuth2revoke, .oAuth2AuthorizationCN, .oAuth2revokeCN, .products, .getEnergySiteStatus, .getEnergySiteLiveStatus, .getEnergySiteInfo, .getEnergySiteHistory, .getEnergySiteCalendarHistory, .getBatteryStatus, .getBatteryData, .getBatteryPowerHistory:
                 return "GET"
 		}
 	}

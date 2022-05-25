@@ -782,6 +782,29 @@ extension TeslaSwift {
             }
         }
     }
+
+    /**
+     Fetchs the history of your energy site
+
+    - returns: A completion handler with an array of Products.
+    */
+    public func getEnergySiteCalendarHistory(siteID: String, period: EnergySiteHistory.Period, completion: @escaping (Result<EnergySiteHistory, Error>) -> ()) -> Void {
+        checkAuthentication { (result: Result<AuthToken, Error>) in
+            switch result {
+            case .failure(let error):
+                completion(Result.failure(error))
+            case .success(_):
+                self.request(.getEnergySiteCalendarHistory(siteID: siteID, period: period), body: nullBody) { (result: Result<Response<EnergySiteHistory>, Error>) in
+                    switch result {
+                    case .failure(let error):
+                        completion(Result.failure(error))
+                    case .success(let data):
+                        completion(Result.success(data.response))
+                    }
+                }
+            }
+        }
+    }
     
     /**
      Fetchs the status of your Powerwall battery
