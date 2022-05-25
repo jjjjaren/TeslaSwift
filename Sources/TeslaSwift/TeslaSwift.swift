@@ -788,13 +788,13 @@ extension TeslaSwift {
 
     - returns: A completion handler with an array of Products.
     */
-    public func getEnergySiteCalendarHistory(siteID: String, period: EnergySiteHistory.Period, completion: @escaping (Result<EnergySiteHistory, Error>) -> ()) -> Void {
+    public func getEnergySiteCalendarHistory(siteID: String, period: EnergySiteHistory.Period, endDate: String, completion: @escaping (Result<EnergySiteHistory, Error>) -> ()) -> Void {
         checkAuthentication { (result: Result<AuthToken, Error>) in
             switch result {
             case .failure(let error):
                 completion(Result.failure(error))
             case .success(_):
-                self.request(.getEnergySiteCalendarHistory(siteID: siteID, period: period), body: nullBody) { (result: Result<Response<EnergySiteHistory>, Error>) in
+                self.request(.getEnergySiteCalendarHistory(siteID: siteID, period: period, endDate: endDate), body: nullBody) { (result: Result<Response<EnergySiteHistory>, Error>) in
                     switch result {
                     case .failure(let error):
                         completion(Result.failure(error))

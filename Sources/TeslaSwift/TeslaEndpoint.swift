@@ -34,7 +34,7 @@ enum Endpoint {
     case getEnergySiteLiveStatus(siteID: String)
     case getEnergySiteInfo(siteID: String)
     case getEnergySiteHistory(siteID: String, period: EnergySiteHistory.Period)
-    case getEnergySiteCalendarHistory(siteID: String, period: EnergySiteHistory.Period)
+    case getEnergySiteCalendarHistory(siteID: String, period: EnergySiteHistory.Period, endDate: String)
     case getBatteryStatus(batteryID: String)
     case getBatteryData(batteryID: String)
     case getBatteryPowerHistory(batteryID: String)
@@ -92,7 +92,7 @@ extension Endpoint {
                 return "/api/1/energy_sites/\(siteID)/site_info"
             case .getEnergySiteHistory(let siteID, _):
                 return "/api/1/energy_sites/\(siteID)/history"
-            case .getEnergySiteCalendarHistory(let siteID, _):
+            case .getEnergySiteCalendarHistory(let siteID, _, _):
                 return "/api/1/energy_sites/\(siteID)/calendar_history"
             case .getBatteryStatus(let batteryID):
                 return "/api/1/powerwalls/\(batteryID)/status"
@@ -120,6 +120,8 @@ extension Endpoint {
                 return [URLQueryItem(name: "token", value: token)]
             case let .getEnergySiteHistory(_, period):
                 return [URLQueryItem(name: "period", value: period.rawValue), URLQueryItem(name: "kind", value: "energy")]
+            case let .getEnergySiteCalendarHistory(_, period, endDate):
+            return [URLQueryItem(name: "period", value: period.rawValue), URLQueryItem(name: "kind", value: "energy"), URLQueryItem(name: "end_date", value: endDate)]
             default:
                 return []
         }
