@@ -784,17 +784,40 @@ extension TeslaSwift {
     }
 
     /**
-     Fetchs the history of your energy site
+     Fetchs the energy history of your energy site
 
     - returns: A completion handler with an array of Products.
     */
-    public func getEnergySiteCalendarHistory(siteID: String, period: EnergySiteHistory.Period, endDate: String, completion: @escaping (Result<EnergySiteHistory, Error>) -> ()) -> Void {
+    public func getEnergySiteCalendarHistoryEnergy(siteID: String, period: EnergySiteHistory.Period, endDate: String, completion: @escaping (Result<EnergySiteHistory, Error>) -> ()) -> Void {
         checkAuthentication { (result: Result<AuthToken, Error>) in
             switch result {
             case .failure(let error):
                 completion(Result.failure(error))
             case .success(_):
-                self.request(.getEnergySiteCalendarHistory(siteID: siteID, period: period, endDate: endDate), body: nullBody) { (result: Result<Response<EnergySiteHistory>, Error>) in
+                self.request(.getEnergySiteCalendarHistoryEnergy(siteID: siteID, period: period, endDate: endDate), body: nullBody) { (result: Result<Response<EnergySiteHistory>, Error>) in
+                    switch result {
+                    case .failure(let error):
+                        completion(Result.failure(error))
+                    case .success(let data):
+                        completion(Result.success(data.response))
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     Fetchs the power history of your energy site
+
+    - returns: A completion handler with an array of Products.
+    */
+    public func getEnergySiteCalendarHistoryPower(siteID: String, period: EnergySiteHistory.Period, endDate: String, completion: @escaping (Result<EnergySiteHistoryPower, Error>) -> ()) -> Void {
+        checkAuthentication { (result: Result<AuthToken, Error>) in
+            switch result {
+            case .failure(let error):
+                completion(Result.failure(error))
+            case .success(_):
+                self.request(.getEnergySiteCalendarHistoryPower(siteID: siteID, period: period, endDate: endDate), body: nullBody) { (result: Result<Response<EnergySiteHistoryPower>, Error>) in
                     switch result {
                     case .failure(let error):
                         completion(Result.failure(error))
