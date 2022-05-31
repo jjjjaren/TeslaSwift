@@ -126,7 +126,7 @@ extension Endpoint {
             case let .getEnergySiteCalendarHistoryEnergy(_, period, endDate):
                 return [URLQueryItem(name: "period", value: period.rawValue), URLQueryItem(name: "kind", value: "energy"), URLQueryItem(name: "end_date", value: endDate)]
             case let .getEnergySiteCalendarHistoryPower(_, period, endDate):
-                return [URLQueryItem(name: "period", value: period.rawValue), URLQueryItem(name: "kind", value: "pwoer"), URLQueryItem(name: "end_date", value: endDate)]
+                return [URLQueryItem(name: "period", value: period.rawValue), URLQueryItem(name: "kind", value: "power"), URLQueryItem(name: "end_date", value: endDate)]
             default:
                 return []
         }
