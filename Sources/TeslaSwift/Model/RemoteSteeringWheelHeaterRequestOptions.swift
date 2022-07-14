@@ -9,7 +9,6 @@
 import Foundation
 
 open class RemoteSteeringWheelHeaterRequestOptions: Encodable {
-
     open var on: Bool
 
     init(on: Bool) {
@@ -17,6 +16,6 @@ open class RemoteSteeringWheelHeaterRequestOptions: Encodable {
     }
 
     enum CodingKeys: String, CodingKey {
-        case on = "on"
+        case on
     }
 }

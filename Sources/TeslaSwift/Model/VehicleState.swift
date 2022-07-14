@@ -207,9 +207,7 @@ open class VehicleState: Codable {
 	}
 	
 	required public init(from decoder: Decoder) throws {
-		
 		let container = try decoder.container(keyedBy: CodingKeys.self)
-
 
 		apiVersion = try? container.decode(Int.self, forKey: .apiVersion)
 		

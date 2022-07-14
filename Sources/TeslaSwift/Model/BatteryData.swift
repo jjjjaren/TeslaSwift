@@ -38,7 +38,6 @@ open class BatteryData: Codable {
         case batteryCount = "battery_count"
     }
     
-    
     // MARK: - Backup
     open class Backup: Codable {
         open var backupReservePercent: Double

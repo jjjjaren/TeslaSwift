@@ -50,7 +50,6 @@ open class EnergySite: Codable {
         case solarPower = "solar_power"
     }
 
-
     // MARK: - Components
     open class Components: Codable {
         open var battery: Bool
